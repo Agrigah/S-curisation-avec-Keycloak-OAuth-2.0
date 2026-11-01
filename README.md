@@ -194,19 +194,8 @@ Pour Postman : se connecter dans le navigateur, ouvrir *DevTools → Network*, c
 2. **Endpoint `GET /api/profil`** : retourne l'identifiant (`sub`) et le nom d'utilisateur (`preferred_username`) extraits du JWT.
 3. **Tests de sécurité** : voir le tableau ci-dessus.
 
-## 9. Dépannage (problèmes rencontrés)
 
-| Symptôme | Cause et solution |
-|---|---|
-| `Invalid username or password` | Mot de passe non défini ou *Temporary* activé : *Users → Credentials → Reset password* (Temporary Off). Le compte `admin` n'existe que dans le realm `master`. |
-| « Impossible de se connecter au serveur Keycloak » + erreur CORS sur `/token` | *Web origins* incorrect : mettre `http://localhost:5173` (sans `/` final) puis **Save**. |
-| `Port 5173 is already in use` | Un ancien `npm run dev` tourne : `netstat -ano \| findstr :5173` puis `taskkill /PID <PID> /F`. |
-| L'API ne démarre pas | Keycloak non démarré ou realm `enset-realm` inexistant (`issuer-uri`). |
-| 401 sur toutes les requêtes | Utiliser `localhost` et non `127.0.0.1` : l'émetteur du jeton doit être `http://localhost:8080/realms/enset-realm`. |
-| Rôle absent après modification | Se déconnecter puis se reconnecter : les rôles sont lus dans le token émis à la connexion. |
-| Erreurs de compilation Java | Vérifier que le projet est bien ajouté comme projet Maven dans IntelliJ et que le SDK est 17, 21 ou 23. |
-
-## 10. Notes de sécurité
+## 9. Notes de sécurité
 
 - `admin/admin` et `start-dev` sont réservés au TP local.
 - Ne jamais publier un Access Token réel.
